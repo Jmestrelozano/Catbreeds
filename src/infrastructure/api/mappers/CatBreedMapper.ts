@@ -2,12 +2,12 @@ import { CatBreed } from '../../../domain/entities/CatBreed';
 import { CatBreedDTO } from '../dtos/CatBreedDTO';
 
 /**
- * Mapper que transforma DTOs de la API a entidades del dominio.
- * Aísla los detalles de implementación de la API del dominio.
+ * Mapper that transforms API DTOs to domain entities.
+ * Isolates API implementation details from the domain.
  */
 export class CatBreedMapper {
   /**
-   * Transforma un DTO de la API a una entidad del dominio.
+   * Transforms an API DTO to a domain entity.
    */
   static toDomain(dto: CatBreedDTO): CatBreed {
     return {
@@ -43,7 +43,7 @@ export class CatBreedMapper {
   }
 
   /**
-   * Transforma múltiples DTOs a entidades del dominio.
+   * Transforms multiple DTOs to domain entities.
    */
   static toDomainList(dtos: CatBreedDTO[]): CatBreed[] {
     return dtos.map((dto) => this.toDomain(dto));
