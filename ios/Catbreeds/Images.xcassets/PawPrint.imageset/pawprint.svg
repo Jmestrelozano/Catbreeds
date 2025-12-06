@@ -1,0 +1,20 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Main paw pad (outer circle) - white fill -->
+  <ellipse cx="100" cy="100" rx="40" ry="40" fill="#FFFFFF"/>
+  
+  <!-- Top left pad - white fill -->
+  <ellipse cx="50" cy="50" rx="20" ry="20" fill="#FFFFFF"/>
+  
+  <!-- Top right pad - white fill -->
+  <ellipse cx="150" cy="50" rx="20" ry="20" fill="#FFFFFF"/>
+  
+  <!-- Bottom left pad - white fill -->
+  <ellipse cx="40" cy="140" rx="18" ry="18" fill="#FFFFFF"/>
+  
+  <!-- Bottom right pad - white fill -->
+  <ellipse cx="160" cy="140" rx="18" ry="18" fill="#FFFFFF"/>
+  
+  <!-- Inner white circle for main pad (to show interior is white) -->
+  <ellipse cx="100" cy="100" rx="20" ry="20" fill="#FFFFFF"/>
+</svg>
+
