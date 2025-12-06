@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="200dp"
+    android:height="200dp"
+    android:viewportWidth="200"
+    android:viewportHeight="200">
+    
+    <!-- Main paw pad (center circle) - white fill -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M100,120 A20,20 0 1,1 100,80 A20,20 0 1,1 100,120 Z"/>
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M60,100 A40,40 0 1,1 140,100 A40,40 0 1,1 60,100 Z"/>
+    
+    <!-- Inner white circle for main pad (to show interior is white) -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M80,100 A20,20 0 1,1 120,100 A20,20 0 1,1 80,100 Z"/>
+    
+    <!-- Top left pad - white fill -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M30,50 A20,20 0 1,1 70,50 A20,20 0 1,1 30,50 Z"/>
+    
+    <!-- Top right pad - white fill -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M130,50 A20,20 0 1,1 170,50 A20,20 0 1,1 130,50 Z"/>
+    
+    <!-- Bottom left pad - white fill -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M22,140 A18,18 0 1,1 58,140 A18,18 0 1,1 22,140 Z"/>
+    
+    <!-- Bottom right pad - white fill -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M142,140 A18,18 0 1,1 178,140 A18,18 0 1,1 142,140 Z"/>
+    
+</vector>
+
