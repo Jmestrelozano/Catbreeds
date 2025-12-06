@@ -7,11 +7,9 @@ import { FavoritesService } from '../../application/FavoritesService';
 import { CatApiClient } from '../api/CatApiClient';
 
 /**
- * Contenedor de dependencias para arquitectura hexagonal.
- * Centraliza la creación e inyección de dependencias.
- * 
- * NOTA: Usa Singleton para simplificar, pero en producción considerar
- * un contenedor de DI más robusto como tsyringe o InversifyJS.
+ * Dependency container for hexagonal architecture.
+ * Centralizes dependency creation and injection.
+ *
  */
 export class DependencyContainer {
   private static catBreedRepository: ICatBreedRepository | null = null;
@@ -21,8 +19,8 @@ export class DependencyContainer {
   private static apiClient: CatApiClient | null = null;
 
   /**
-   * Obtiene la instancia del cliente de API.
-   * Singleton para evitar múltiples instancias.
+   * Gets the API client instance.
+   * Singleton pattern to avoid multiple instances.
    */
   private static getApiClient(): CatApiClient {
     if (!this.apiClient) {
@@ -32,11 +30,10 @@ export class DependencyContainer {
   }
 
   /**
-   * Obtiene la instancia del repositorio de razas de gatos.
-   * Implementa patrón Singleton para evitar múltiples instancias.
-   * Inyecta el cliente de API como dependencia.
+   * Gets the cat breed repository instance.
+   * Private method: only used internally to build services.
    */
-  static getCatBreedRepository(): ICatBreedRepository {
+  private static getCatBreedRepository(): ICatBreedRepository {
     if (!this.catBreedRepository) {
       const apiClient = this.getApiClient();
       this.catBreedRepository = new CatBreedRepository(apiClient);
@@ -45,10 +42,10 @@ export class DependencyContainer {
   }
 
   /**
-   * Obtiene la instancia del repositorio de favoritos.
-   * Implementa patrón Singleton para evitar múltiples instancias.
+   * Gets the favorites repository instance.
+   * Private method: only used internally to build services.
    */
-  static getFavoritesRepository(): IFavoritesRepository {
+  private static getFavoritesRepository(): IFavoritesRepository {
     if (!this.favoritesRepository) {
       this.favoritesRepository = new FavoritesRepository();
     }
@@ -56,8 +53,7 @@ export class DependencyContainer {
   }
 
   /**
-   * Obtiene la instancia del servicio de razas de gatos.
-   * Inyecta las dependencias necesarias.
+   * Gets the cat breed service instance.
    */
   static getCatBreedService(): CatBreedService {
     if (!this.catBreedService) {
@@ -68,8 +64,7 @@ export class DependencyContainer {
   }
 
   /**
-   * Obtiene la instancia del servicio de favoritos.
-   * Inyecta las dependencias necesarias.
+   * Gets the favorites service instance.
    */
   static getFavoritesService(): FavoritesService {
     if (!this.favoritesService) {
@@ -80,7 +75,7 @@ export class DependencyContainer {
   }
 
   /**
-   * Resetea todas las instancias (útil para testing).
+   * Resets all instances (useful for testing).
    */
   static reset(): void {
     this.catBreedRepository = null;

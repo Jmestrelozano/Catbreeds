@@ -6,12 +6,12 @@ import { IsFavoriteUseCase } from '../domain/usecases/IsFavoriteUseCase';
 import { IFavoritesRepository } from '../domain/ports/repositories/IFavoritesRepository';
 
 /**
- * Servicio de aplicación para favoritos.
- * Orquesta casos de uso y puede contener lógica de aplicación que involucra múltiples casos de uso.
+ * Application service for favorites.
+ * Orchestrates use cases and may contain application logic involving multiple use cases.
  * 
- * NOTA: En una arquitectura hexagonal estricta, la presentación podría usar
- * directamente los casos de uso. Este servicio añade una capa de orquestación
- * que puede ser útil para operaciones complejas que involucran múltiples casos de uso.
+ * NOTE: In a strict hexagonal architecture, the presentation layer could use
+ * use cases directly. This service adds an orchestration layer
+ * that can be useful for complex operations involving multiple use cases.
  */
 export class FavoritesService {
   private getAllFavoritesUseCase: GetAllFavoritesUseCase;

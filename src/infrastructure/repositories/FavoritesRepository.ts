@@ -5,8 +5,8 @@ import { IFavoritesRepository } from '../../domain/ports/repositories/IFavorites
 const FAVORITES_KEY = '@catbreeds_favorites';
 
 /**
- * Implementación del repositorio de favoritos usando AsyncStorage.
- * Adaptador que implementa el puerto definido por el dominio.
+ * Favorites repository implementation using AsyncStorage.
+ * Adapter that implements the port defined by the domain.
  */
 export class FavoritesRepository implements IFavoritesRepository {
   async getFavorites(): Promise<CatBreed[]> {
@@ -24,8 +24,6 @@ export class FavoritesRepository implements IFavoritesRepository {
 
   async addFavorite(breed: CatBreed): Promise<boolean> {
     try {
-      // El repositorio asume que las validaciones de negocio ya fueron hechas
-      // por el caso de uso. Solo se encarga de persistir los datos.
       const favorites = await this.getFavorites();
       favorites.push(breed);
       await AsyncStorage.setItem(FAVORITES_KEY, JSON.stringify(favorites));

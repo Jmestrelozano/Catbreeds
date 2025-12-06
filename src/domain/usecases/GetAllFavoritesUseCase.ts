@@ -2,17 +2,17 @@ import { CatBreed } from '../entities/CatBreed';
 import { IFavoritesRepository } from '../ports/repositories/IFavoritesRepository';
 
 /**
- * Caso de uso: Obtener todas las razas de gatos favoritas.
- * Contiene la lógica de aplicación para este caso de uso.
+ * Use case: Get all favorite cat breeds.
+ * Contains the application logic for this use case.
  */
 export class GetAllFavoritesUseCase {
   constructor(private favoritesRepository: IFavoritesRepository) {}
 
   async execute(): Promise<CatBreed[]> {
-    // Aquí se podría añadir lógica de negocio como:
-    // - Ordenamiento
-    // - Filtrado
-    // - Validaciones
+    // Business logic could be added here such as:
+    // - Sorting
+    // - Filtering
+    // - Validations
     return await this.favoritesRepository.getFavorites();
   }
 }

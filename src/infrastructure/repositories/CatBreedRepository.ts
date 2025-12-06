@@ -5,15 +5,14 @@ import { CatBreedDTO } from '../api/dtos/CatBreedDTO';
 import { CatBreedMapper } from '../api/mappers/CatBreedMapper';
 
 /**
- * Implementación del repositorio de razas de gatos.
- * Adaptador que implementa el puerto definido por el dominio.
- * Utiliza el cliente de API y mappers para transformar DTOs a entidades.
+ * Cat breed repository implementation.
+ * Adapter that implements the port defined by the domain.
+ * Uses the API client and mappers to transform DTOs to entities.
  */
 export class CatBreedRepository implements ICatBreedRepository {
   private apiClient: CatApiClient;
 
   constructor(apiClient?: CatApiClient) {
-    // Inyección de dependencias: permite inyectar un mock para testing
     this.apiClient = apiClient || new CatApiClient();
   }
 
