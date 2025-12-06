@@ -9,18 +9,17 @@ export const ErrorMessage: React.FC<ErrorMessageProps> = ({
 }) => {
   const styles = errorMessageStyles;
   
-  // Determine icon based on error type
   const getIcon = () => {
     if (message.toLowerCase().includes('connection') || message.toLowerCase().includes('internet')) {
-      return '📡'; // No connection
+      return '📡';
     }
     if (message.toLowerCase().includes('server')) {
-      return '🔧'; // Server error
+      return '🔧';
     }
     if (message.toLowerCase().includes('timeout') || message.toLowerCase().includes('took too long')) {
-      return '⏱️'; // Timeout
+      return '⏱️';
     }
-    return '😿'; // Generic error
+    return '😿';
   };
 
   return (

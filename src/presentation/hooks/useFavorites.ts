@@ -2,10 +2,6 @@ import { useState, useCallback } from 'react';
 import { CatBreed } from '../../domain/entities/CatBreed';
 import { useServices } from '../context/ServicesContext';
 
-/**
- * Custom hook to manage favorites logic.
- * Separates business logic from presentation (SRP).
- */
 export const useFavorites = () => {
   const { favoritesService } = useServices();
   const [favorites, setFavorites] = useState<CatBreed[]>([]);

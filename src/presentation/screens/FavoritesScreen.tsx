@@ -52,7 +52,7 @@ export const FavoritesScreen: React.FC = () => {
   return (
     <ScreenContentWrapper loading={loading}>
     <SafeAreaView style={styles.container}>
-      {/* Header */}
+
       <View style={[styles.header, { paddingTop: Platform.OS === 'android' ? Math.max(insets.top, 16) : 16 }]}>
         <View style={styles.headerLeft}>
           <TouchableOpacity
@@ -67,7 +67,7 @@ export const FavoritesScreen: React.FC = () => {
         </View>
       </View>
 
-      {/* Category Filters */}
+
       <View style={styles.filtersContainer}>
         <ScrollView
           horizontal
@@ -107,7 +107,7 @@ export const FavoritesScreen: React.FC = () => {
         </ScrollView>
       </View>
 
-      {/* Search Input */}
+
       <View style={styles.searchContainer}>
         <TextInput
           style={styles.searchInput}
@@ -118,7 +118,6 @@ export const FavoritesScreen: React.FC = () => {
         />
       </View>
 
-      {/* Favorites List */}
       <FlatList
         data={filteredFavorites}
         keyExtractor={(item) => item.id}

@@ -8,7 +8,7 @@ interface ServicesContextType {
   favoritesService: FavoritesService;
 }
 
-const ServicesContext = createContext<ServicesContextType | undefined>(undefined);
+export const ServicesContext = createContext<ServicesContextType | undefined>(undefined);
 
 interface ServicesProviderProps {
   children: ReactNode;

@@ -2,10 +2,6 @@ import { useState, useCallback, useEffect } from 'react';
 import { useServices } from '../context/ServicesContext';
 import { CatBreed } from '../../domain/entities/CatBreed';
 
-/**
- * Custom hook to manage favorite state of a breed.
- * Separates business logic from presentation (SRP).
- */
 export const useFavoriteToggle = (breedId: string | null) => {
   const { favoritesService } = useServices();
   const [isFavorite, setIsFavorite] = useState<boolean>(false);

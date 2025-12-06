@@ -2,10 +2,6 @@ import { useState, useCallback } from 'react';
 import { CatBreed } from '../../domain/entities/CatBreed';
 import { useServices } from '../context/ServicesContext';
 
-/**
- * Custom hook to manage cat breeds logic.
- * Separates business logic from presentation (SRP).
- */
 export const useCatBreeds = () => {
   const { catBreedService } = useServices();
   const [breeds, setBreeds] = useState<CatBreed[]>([]);

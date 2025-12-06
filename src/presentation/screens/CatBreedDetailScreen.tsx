@@ -72,7 +72,7 @@ export const CatBreedDetailScreen: React.FC = () => {
     <ScreenContentWrapper loading={loading} error={displayError} onRetry={loadBreed}>
       {breed && (
         <SafeAreaView style={styles.container}>
-      {/* Navbar */}
+
       <View style={[styles.navbar, { paddingTop: Platform.OS === 'android' ? Math.max(insets.top, 16) : 16 }]}>
         <View style={styles.navbarLeft}>
           <TouchableOpacity
