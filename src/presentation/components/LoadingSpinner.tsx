@@ -1,0 +1,16 @@
+import React from 'react';
+import { View, ActivityIndicator, Text } from 'react-native';
+import { loadingSpinnerStyles } from '../styles/LoadingSpinner.styles';
+import { Colors } from '../styles/sharedStyles';
+
+export const LoadingSpinner: React.FC = () => {
+  const styles = loadingSpinnerStyles;
+  
+  return (
+    <View style={styles.container}>
+      <ActivityIndicator size="large" color={Colors.primary} />
+      <Text style={styles.text}>Loading cat breeds...</Text>
+    </View>
+  );
+};
+
