@@ -5,10 +5,6 @@ interface UseBreedFilterOptions {
   includeDescriptionInSearch?: boolean;
 }
 
-/**
- * Custom hook to manage cat breed filtering logic.
- * Separates filtering logic from presentation (SRP).
- */
 export const useBreedFilter = (
   breeds: CatBreed[],
   options: UseBreedFilterOptions = {},
