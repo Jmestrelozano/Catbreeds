@@ -1,7 +1,7 @@
 /**
- * Entidad del dominio.
- * Representa una raza de gato en el dominio de negocio.
- * Usa convenciones del dominio (camelCase), no de la API.
+ * Domain entity.
+ * Represents a cat breed in the business domain.
+ * Uses domain conventions (camelCase), not API conventions.
  */
 export interface CatBreed {
   id: string;

@@ -1,8 +1,8 @@
 import { CatBreed } from '../../entities/CatBreed';
 
 /**
- * Puerto (interfaz) definido por el dominio.
- * Define el contrato que deben cumplir los adaptadores de repositorio.
+ * Port (interface) defined by the domain.
+ * Defines the contract that repository adapters must fulfill.
  */
 export interface IFavoritesRepository {
   getFavorites(): Promise<CatBreed[]>;

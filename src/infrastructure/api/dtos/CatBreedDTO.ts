@@ -1,6 +1,6 @@
 /**
- * DTO (Data Transfer Object) para la respuesta de la API.
- * Representa la estructura exacta de los datos que vienen de la API.
+ * DTO (Data Transfer Object) for the API response.
+ * Represents the exact structure of data coming from the API.
  */
 export interface CatBreedDTO {
   id: string;
