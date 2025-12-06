@@ -39,7 +39,7 @@ export const CatBreedsListScreen: React.FC = () => {
   return (
     <ScreenContentWrapper loading={loading} error={error} onRetry={loadBreeds}>
     <SafeAreaView style={styles.container}>
-      {/* Navbar */}
+
       <View style={[styles.navbar, { paddingTop: Platform.OS === 'android' ? Math.max(insets.top, 16) : 16 }]}>
         <View style={styles.navbarLeft}>
           <Text style={styles.pawIcon}>🐾</Text>
