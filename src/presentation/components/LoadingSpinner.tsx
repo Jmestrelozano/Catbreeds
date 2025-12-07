@@ -7,9 +7,9 @@ export const LoadingSpinner: React.FC = () => {
   const styles = loadingSpinnerStyles;
   
   return (
-    <View style={styles.container}>
+    <View style={styles.container} accessibilityRole="progressbar" accessibilityLabel="Loading cat breeds">
       <ActivityIndicator size="large" color={Colors.primary} />
-      <Text style={styles.text}>Loading cat breeds...</Text>
+      <Text style={styles.text} accessibilityRole="text">Loading cat breeds...</Text>
     </View>
   );
 };

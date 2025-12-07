@@ -23,11 +23,16 @@ export const ErrorMessage: React.FC<ErrorMessageProps> = ({
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.icon}>{getIcon()}</Text>
-      <Text style={styles.message}>{message}</Text>
+    <View style={styles.container} accessibilityRole="alert">
+      <Text style={styles.icon} accessibilityRole="none">{getIcon()}</Text>
+      <Text style={styles.message} accessibilityRole="text">{message}</Text>
       {onRetry && (
-        <TouchableOpacity style={styles.retryButton} onPress={onRetry}>
+        <TouchableOpacity 
+          style={styles.retryButton} 
+          onPress={onRetry}
+          accessibilityRole="button"
+          accessibilityLabel="Retry"
+          accessibilityHint="Retries loading the content">
           <Text style={styles.retryText}>Retry</Text>
         </TouchableOpacity>
       )}
