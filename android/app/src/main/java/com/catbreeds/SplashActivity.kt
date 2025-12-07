@@ -11,12 +11,16 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.launch_screen)
         
-        // Wait 2 seconds then start MainActivity
+        // Wait 2 seconds before starting MainActivity
         Handler(Looper.getMainLooper()).postDelayed({
+            // Start MainActivity - it will maintain splash theme
+            // until React Native notifies that it's ready
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()
-        }, 2000)
+            // Use fade transition to avoid flickering
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
+        }, 2000) // 2 seconds delay
     }
 }
 
