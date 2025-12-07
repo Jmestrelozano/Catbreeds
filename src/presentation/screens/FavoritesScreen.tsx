@@ -4,7 +4,6 @@ import {
   Text,
   SafeAreaView,
   FlatList,
-  TextInput,
   TouchableOpacity,
   RefreshControl,
   ScrollView,
@@ -16,9 +15,11 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { RootStackParamList } from '../../../App';
 import { CatBreedCard } from '../components/CatBreedCard';
 import { ScreenContentWrapper } from '../components/ScreenContentWrapper';
+import { SearchBar } from '../components/SearchBar';
 import { favoritesScreenStyles } from '../styles/FavoritesScreen.styles';
 import { useFavorites } from '../hooks/useFavorites';
 import { useBreedFilter } from '../hooks/useBreedFilter';
+import ExpandLeftIcon from '../../../assets/svg/expand_left.svg';
 
 type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
@@ -57,33 +58,42 @@ export const FavoritesScreen: React.FC = () => {
         <View style={styles.headerLeft}>
           <TouchableOpacity
             onPress={() => navigation.goBack()}
-            style={styles.backButton}>
-            <Text style={styles.backIcon}>←</Text>
+            style={styles.backButton}
+            accessibilityRole="button"
+            accessibilityLabel="Back"
+            accessibilityHint="Returns to the previous screen">
+            <ExpandLeftIcon width={40} height={40} />
           </TouchableOpacity>
-          <Text style={styles.pawIcon}>🐾</Text>
-          <Text style={styles.headerTitle}>
+          <Text style={styles.pawIcon} accessibilityRole="none">🐾</Text>
+          <Text style={styles.headerTitle} accessibilityRole="header">
             Favorites ({favorites.length})
           </Text>
         </View>
       </View>
 
 
-      <View style={styles.filtersContainer}>
+      <View style={styles.filtersContainer} accessibilityRole="radiogroup" accessibilityLabel="Filters by origin">
         <ScrollView
           horizontal
           showsHorizontalScrollIndicator={false}
-          contentContainerStyle={styles.filtersScroll}>
+          contentContainerStyle={styles.filtersScroll}
+          accessibilityRole="none">
           <TouchableOpacity
             style={[
               styles.filterChip,
               selectedOrigin === null && styles.filterChipSelected,
             ]}
-            onPress={() => setSelectedOrigin(null)}>
+            onPress={() => setSelectedOrigin(null)}
+            accessibilityRole="radio"
+            accessibilityState={{ selected: selectedOrigin === null }}
+            accessibilityLabel="All origins"
+            accessibilityHint="Shows all favorite breeds">
             <Text
               style={[
                 styles.filterChipText,
                 selectedOrigin === null && styles.filterChipTextSelected,
-              ]}>
+              ]}
+              accessibilityRole="none">
               All
             </Text>
           </TouchableOpacity>
@@ -94,12 +104,17 @@ export const FavoritesScreen: React.FC = () => {
                 styles.filterChip,
                 selectedOrigin === origin && styles.filterChipSelected,
               ]}
-              onPress={() => setSelectedOrigin(origin)}>
+              onPress={() => setSelectedOrigin(origin)}
+              accessibilityRole="radio"
+              accessibilityState={{ selected: selectedOrigin === origin }}
+              accessibilityLabel={`Filter by origin: ${origin}`}
+              accessibilityHint={`Shows only favorite breeds from ${origin}`}>
               <Text
                 style={[
                   styles.filterChipText,
                   selectedOrigin === origin && styles.filterChipTextSelected,
-                ]}>
+                ]}
+                accessibilityRole="none">
               {origin}
             </Text>
           </TouchableOpacity>
@@ -108,15 +123,15 @@ export const FavoritesScreen: React.FC = () => {
       </View>
 
 
-      <View style={styles.searchContainer}>
-        <TextInput
-          style={styles.searchInput}
-          placeholder="Search favorites..."
-          placeholderTextColor="#999"
-          value={searchQuery}
-          onChangeText={setSearchQuery}
-        />
-      </View>
+      <SearchBar
+        value={searchQuery}
+        onChangeText={setSearchQuery}
+        placeholder="Search favorites..."
+        showIcon={true}
+        showFavoriteButton={false}
+        accessibilityLabel="Search favorites"
+        accessibilityHint="Type to search favorite breeds by name"
+      />
 
       <FlatList
         data={filteredFavorites}
@@ -132,11 +147,17 @@ export const FavoritesScreen: React.FC = () => {
         )}
         contentContainerStyle={styles.listContent}
         showsVerticalScrollIndicator={false}
+        accessibilityRole="list"
+        accessibilityLabel={`Favorites list. ${filteredFavorites.length} ${filteredFavorites.length === 1 ? 'breed found' : 'breeds found'}`}
         refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={refreshFavorites} />
+          <RefreshControl 
+            refreshing={refreshing} 
+            onRefresh={refreshFavorites}
+            accessibilityRole="none"
+          />
         }
         ListEmptyComponent={
-          <View style={styles.emptyContainer}>
+          <View style={styles.emptyContainer} accessibilityRole="text">
             <Text style={styles.emptyText}>
               {favorites.length === 0
                 ? "You don't have any favorites yet"
