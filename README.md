@@ -1,97 +1,230 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# Catbreeds
 
-# Getting Started
+Aplicación React Native para explorar razas de gatos utilizando la API de The Cat API.
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+## 📋 Requisitos
 
-## Step 1: Start Metro
+- Node.js >= 20
+- npm o yarn
+- React Native CLI
+- Android Studio (para Android)
+- Xcode (para iOS)
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+## 🏗️ Arquitectura
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+Este proyecto utiliza **Arquitectura Hexagonal** (también conocida como Arquitectura de Puertos y Adaptadores), que separa la lógica de negocio de los detalles de implementación.
 
-```sh
-# Using npm
+Para más detalles sobre la arquitectura, consulta la [Guía de Arquitectura](./GUIA_ARQUITECTURA.md).
+
+### Estructura del Proyecto
+
+```
+src/
+├── domain/              # Capa de Dominio
+│   ├── entities/        # Entidades del dominio
+│   ├── ports/           # Puertos (Interfaces)
+│   │   └── repositories/ # Interfaces de repositorios
+│   └── usecases/        # Casos de uso
+├── application/         # Capa de Aplicación
+│   ├── CatBreedService.ts
+│   └── FavoritesService.ts
+├── infrastructure/      # Capa de Infraestructura
+│   ├── api/            # Cliente HTTP y DTOs
+│   ├── dependencies/   # Contenedor de dependencias
+│   └── repositories/   # Implementaciones de repositorios
+├── native/             # Código nativo
+│   └── SplashScreen.ts
+└── presentation/       # Capa de Presentación
+    ├── screens/        # Pantallas
+    ├── components/     # Componentes UI
+    ├── context/        # Context providers
+    ├── hooks/          # Custom hooks
+    ├── interfaces/     # Interfaces TypeScript
+    └── styles/         # Estilos
+```
+
+## ✨ Características
+
+- ✅ Lista de todas las razas de gatos
+- ✅ Búsqueda por nombre y origen
+- ✅ Detalles completos de cada raza
+- ✅ Sistema de favoritos con almacenamiento local
+- ✅ Navegación entre pantallas
+- ✅ Arquitectura hexagonal bien estructurada
+- ✅ Manejo de errores y estados de carga
+- ✅ Diseño moderno y responsive
+- ✅ Splash screen nativo
+- ✅ Testing con Jest y React Native Testing Library
+- ✅ Accesibilidad para personas con discapacidad
+
+## 🚀 Instalación
+
+1. Clona el repositorio:
+
+```bash
+git clone <url-del-repositorio>
+cd Catbreeds
+```
+
+2. Instala las dependencias:
+
+```bash
+npm install
+```
+
+3. Configura las variables de entorno:
+
+Crea un archivo `.env` en la raíz del proyecto con las siguientes variables:
+
+```env
+CAT_API_KEY=tu_api_key_aqui
+CAT_API_BASE_URL=https://api.thecatapi.com/v1
+```
+
+**Nota:** Puedes obtener una API key gratuita en [The Cat API](https://thecatapi.com/).
+
+**Para los tests:** Opcionalmente, puedes crear un archivo `.env.test` con las mismas variables para usar en los tests. Si no existe, se usarán valores por defecto.
+
+4. Para iOS, instala los pods:
+
+```bash
+cd ios && pod install && cd ..
+```
+
+## 🏃 Ejecución
+
+### Desarrollo
+
+Inicia el Metro Bundler:
+
+```bash
 npm start
-
-# OR using Yarn
-yarn start
 ```
 
-## Step 2: Build and run your app
+En otra terminal, ejecuta la app:
 
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
-
-### Android
-
-```sh
-# Using npm
+#### Android
+```bash
 npm run android
-
-# OR using Yarn
-yarn android
 ```
+Esto compila e instala la app en un emulador o dispositivo conectado.
 
-### iOS
-
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
-
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
-
-```sh
-bundle install
-```
-
-Then, and every time you update your native dependencies, run:
-
-```sh
-bundle exec pod install
-```
-
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
-
-```sh
-# Using npm
+#### iOS
+```bash
 npm run ios
-
-# OR using Yarn
-yarn ios
 ```
 
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
+### Build de Producción
 
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
+#### Android
 
-## Step 3: Modify your app
+**Generar APK Release:**
+```bash
+cd android
+./gradlew assembleRelease
+```
+El APK se generará en: `android/app/build/outputs/apk/release/app-release.apk`
 
-Now that you have successfully run the app, let's make changes!
+**Generar AAB (Android App Bundle) para Google Play:**
+```bash
+cd android
+./gradlew bundleRelease
+```
+El AAB se generará en: `android/app/build/outputs/bundle/release/app-release.aab`
 
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
+**Nota:** Para producción, necesitarás configurar un keystore de firma. Consulta la [documentación oficial de React Native](https://reactnative.dev/docs/signed-apk-android).
 
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
+#### iOS
 
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
+Abre el proyecto en Xcode y genera el build desde ahí, o usa:
 
-## Congratulations! :tada:
+```bash
+cd ios
+xcodebuild -workspace Catbreeds.xcworkspace -scheme Catbreeds -configuration Release
+```
 
-You've successfully run and modified your React Native App. :partying_face:
+## 🧪 Testing
 
-### Now what?
+Ejecuta los tests:
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
+```bash
+# Ejecutar todos los tests
+npm test
 
-# Troubleshooting
+# Ejecutar tests en modo watch
+npm run test:watch
 
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
+# Ejecutar tests con cobertura
+npm run test:coverage
 
-# Learn More
+# Ejecutar tests con cobertura en modo watch
+npm run test:coverage:watch
+```
 
-To learn more about React Native, take a look at the following resources:
+Los reportes de cobertura se generan en la carpeta `coverage/`.
 
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+## 📡 API
+
+La aplicación consume la API de The Cat API:
+- **Endpoint base**: `https://api.thecatapi.com/v1`
+- **Endpoint principal**: `/breeds`
+- **Autenticación**: Header `x-api-key` o query parameter `api_key`
+
+Para obtener una API key gratuita, visita [The Cat API](https://thecatapi.com/).
+
+## 🛠️ Tecnologías
+
+### Core
+- **React Native** 0.82.1
+- **React** 19.1.1
+- **TypeScript** 5.8.3
+
+### Navegación
+- **React Navigation** 7.x
+  - @react-navigation/native
+  - @react-navigation/native-stack
+
+### HTTP y Almacenamiento
+- **Axios** 1.7.9 - Cliente HTTP
+- **AsyncStorage** 2.2.0 - Almacenamiento local para favoritos
+
+### UI y Estilos
+- **React Native SVG** 15.15.1 - Soporte para iconos SVG
+- **React Native Safe Area Context** 5.5.2 - Manejo de áreas seguras
+- **React Native Gesture Handler** 2.29.1 - Gestos nativos
+
+### Testing
+- **Jest** 29.6.3 - Framework de testing
+- **React Native Testing Library** 13.3.3 - Utilidades para testing
+- **Jest Native** 5.4.3 - Matchers adicionales
+
+### Desarrollo
+- **ESLint** - Linter
+- **Prettier** - Formateador de código
+- **React Native Dotenv** - Variables de entorno
+
+### Arquitectura
+- **Arquitectura Hexagonal** (Ports & Adapters)
+- **Inyección de Dependencias**
+
+## 📝 Scripts Disponibles
+
+```bash
+# Desarrollo
+npm start              # Inicia Metro Bundler
+npm run android        # Ejecuta en Android
+npm run ios            # Ejecuta en iOS
+
+# Testing
+npm test               # Ejecuta todos los tests
+npm run test:watch     # Tests en modo watch
+npm run test:coverage  # Tests con cobertura
+npm run test:coverage:watch  # Tests con cobertura en modo watch
+
+# Linting
+npm run lint           # Ejecuta ESLint
+```
+
+## 📄 Licencia
+
+MIT

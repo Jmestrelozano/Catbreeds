@@ -22,9 +22,13 @@ jest.mock('@react-navigation/native', () => ({
 }));
 
 const mockUseSafeAreaInsets = jest.fn(() => ({ top: 0, bottom: 0, left: 0, right: 0 }));
-jest.mock('react-native-safe-area-context', () => ({
-  useSafeAreaInsets: () => mockUseSafeAreaInsets(),
-}));
+jest.mock('react-native-safe-area-context', () => {
+  const { View } = require('react-native');
+  return {
+    SafeAreaView: View,
+    useSafeAreaInsets: () => mockUseSafeAreaInsets(),
+  };
+});
 
 jest.mock('../../src/presentation/context/ServicesContext', () => ({
   ServicesProvider: ({ children }: { children: React.ReactNode }) => children,
@@ -218,9 +222,11 @@ describe('FavoritesScreen', () => {
   });
 
   it('should show all cards with favorite badge', () => {
-    const { getAllByText } = render(<FavoritesScreen />);
+    const { getAllByTestId } = render(<FavoritesScreen />);
 
-    const favoriteIcons = getAllByText('❤️');
+    // Los SVGs ahora se renderizan como Views con testID="svg-mock"
+    // Buscamos los SVGs dentro de los badges de favorito
+    const favoriteIcons = getAllByTestId('svg-mock');
     expect(favoriteIcons.length).toBeGreaterThan(0);
   });
 
@@ -231,9 +237,10 @@ describe('FavoritesScreen', () => {
   });
 
   it('should navigate back when back button is pressed', () => {
-    const { getByText } = render(<FavoritesScreen />);
+    const { getByLabelText } = render(<FavoritesScreen />);
 
-    const backButton = getByText('←');
+    // El botón de retroceso tiene accessibilityLabel="Back"
+    const backButton = getByLabelText('Back');
     fireEvent.press(backButton);
 
     expect(mockGoBack).toHaveBeenCalledTimes(1);

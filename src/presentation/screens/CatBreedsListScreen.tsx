@@ -2,13 +2,12 @@ import React, { useEffect } from 'react';
 import {
   View,
   FlatList,
-  SafeAreaView,
   Text,
   Platform,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { RootStackParamList } from '../../../App';
 import { CatBreedCard } from '../components/CatBreedCard';
 import { ScreenContentWrapper } from '../components/ScreenContentWrapper';
