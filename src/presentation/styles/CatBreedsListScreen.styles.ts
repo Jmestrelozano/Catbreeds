@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { Colors, Spacing, Typography, BorderRadius } from './sharedStyles';
+import { Colors, Spacing, Typography, BorderRadius, Shadows } from './sharedStyles';
 
 export const catBreedsListStyles = StyleSheet.create({
   container: {
@@ -8,7 +8,6 @@ export const catBreedsListStyles = StyleSheet.create({
   },
   navbar: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
     alignItems: 'center',
     padding: Spacing.lg,
     backgroundColor: Colors.white,
@@ -25,6 +24,7 @@ export const catBreedsListStyles = StyleSheet.create({
   },
   navbarTitle: {
     fontSize: Typography.size.xl,
+    fontFamily: Typography.fontFamily.bold,
     fontWeight: Typography.weight.bold,
     color: Colors.textPrimary,
   },
@@ -45,28 +45,24 @@ export const catBreedsListStyles = StyleSheet.create({
   favoriteIcon: {
     fontSize: Typography.size.xl,
   },
-  header: {
-    padding: Spacing.lg,
-    backgroundColor: Colors.white,
-    borderBottomWidth: 1,
-    borderBottomColor: Colors.border,
+  tagContainer: {
+    paddingHorizontal: Spacing.lg,
+    paddingTop: Spacing.sm,
+    paddingBottom: Spacing.md,
   },
-  subtitle: {
-    fontSize: Typography.size.md,
-    color: Colors.textSecondary,
+  floatingTag: {
+    alignSelf: 'flex-start',
+    backgroundColor: Colors.accent,
+    borderRadius: BorderRadius.full,
+    paddingHorizontal: Spacing.md,
+    paddingVertical: Spacing.xs,
+    ...Shadows.card,
   },
-  searchContainer: {
-    padding: Spacing.lg,
-    backgroundColor: Colors.white,
-    borderBottomWidth: 1,
-    borderBottomColor: Colors.border,
-  },
-  searchInput: {
-    backgroundColor: Colors.background,
-    borderRadius: BorderRadius.md,
-    padding: Spacing.md,
-    fontSize: Typography.size.base,
-    color: Colors.textPrimary,
+  tagText: {
+    fontSize: Typography.size.sm,
+    fontFamily: Typography.fontFamily.medium,
+    color: Colors.white,
+    fontWeight: Typography.weight.medium,
   },
   listContent: {
     paddingVertical: Spacing.sm,
@@ -77,6 +73,7 @@ export const catBreedsListStyles = StyleSheet.create({
   },
   emptyText: {
     fontSize: Typography.size.base,
+    fontFamily: Typography.fontFamily.regular,
     color: Colors.textPlaceholder,
     textAlign: 'center',
   },

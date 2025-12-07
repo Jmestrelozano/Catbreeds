@@ -52,6 +52,7 @@ export const catBreedCardStyles = StyleSheet.create({
   },
   placeholderText: {
     fontSize: Typography.size.md,
+    fontFamily: Typography.fontFamily.regular,
     color: Colors.textPlaceholder,
     textAlign: 'center',
   },
@@ -63,17 +64,20 @@ export const catBreedCardStyles = StyleSheet.create({
   },
   name: {
     fontSize: Typography.size.xl,
+    fontFamily: Typography.fontFamily.bold,
     fontWeight: Typography.weight.bold,
     color: Colors.textPrimary,
     flex: 1,
   },
   origin: {
     fontSize: Typography.size.md,
+    fontFamily: Typography.fontFamily.regular,
     color: Colors.textSecondary,
     fontStyle: 'italic',
   },
   description: {
     fontSize: Typography.size.md,
+    fontFamily: Typography.fontFamily.regular,
     color: Colors.textTertiary,
     marginBottom: Spacing.md,
     lineHeight: 20,
@@ -83,11 +87,13 @@ export const catBreedCardStyles = StyleSheet.create({
   },
   tagsLabel: {
     fontSize: Typography.size.sm,
+    fontFamily: Typography.fontFamily.regular,
     color: Colors.textLight,
     marginBottom: Spacing.xs,
   },
   tags: {
     fontSize: 13,
+    fontFamily: Typography.fontFamily.regular,
     color: '#444',
   },
   statsContainer: {
@@ -102,11 +108,13 @@ export const catBreedCardStyles = StyleSheet.create({
   },
   statLabel: {
     fontSize: Typography.size.xs,
+    fontFamily: Typography.fontFamily.regular,
     color: Colors.textLight,
     marginBottom: Spacing.xs,
   },
   statValue: {
     fontSize: Typography.size.md,
+    fontFamily: Typography.fontFamily.semibold,
     fontWeight: Typography.weight.semibold,
     color: Colors.textPrimary,
   },

@@ -11,6 +11,7 @@ export const loadingSpinnerStyles = StyleSheet.create({
   text: {
     marginTop: Spacing.lg,
     fontSize: Typography.size.base,
+    fontFamily: Typography.fontFamily.regular,
     color: Colors.textSecondary,
   },
 });

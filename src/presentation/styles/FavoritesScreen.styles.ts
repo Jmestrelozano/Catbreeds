@@ -32,6 +32,7 @@ export const favoritesScreenStyles = StyleSheet.create({
   },
   headerTitle: {
     fontSize: Typography.size.xl,
+    fontFamily: Typography.fontFamily.bold,
     fontWeight: Typography.weight.bold,
     color: Colors.textPrimary,
   },
@@ -59,24 +60,12 @@ export const favoritesScreenStyles = StyleSheet.create({
   },
   filterChipText: {
     fontSize: Typography.size.md,
+    fontFamily: Typography.fontFamily.medium,
     color: Colors.textPrimary,
     fontWeight: Typography.weight.medium,
   },
   filterChipTextSelected: {
     color: Colors.white,
-  },
-  searchContainer: {
-    padding: Spacing.lg,
-    backgroundColor: Colors.white,
-    borderBottomWidth: 1,
-    borderBottomColor: Colors.border,
-  },
-  searchInput: {
-    backgroundColor: Colors.background,
-    borderRadius: BorderRadius.md,
-    padding: Spacing.md,
-    fontSize: Typography.size.base,
-    color: Colors.textPrimary,
   },
   listContent: {
     paddingVertical: Spacing.sm,
@@ -87,6 +76,7 @@ export const favoritesScreenStyles = StyleSheet.create({
   },
   emptyText: {
     fontSize: Typography.size.base,
+    fontFamily: Typography.fontFamily.regular,
     color: Colors.textPlaceholder,
     textAlign: 'center',
   },

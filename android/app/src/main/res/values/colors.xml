@@ -2,5 +2,6 @@
 <resources>
     <color name="splash_background">#FF6B35</color>
     <color name="splash_text">#FFFFFF</color>
+    <color name="app_background">#F5F5F5</color>
 </resources>
 

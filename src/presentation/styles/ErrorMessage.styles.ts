@@ -15,6 +15,7 @@ export const errorMessageStyles = StyleSheet.create({
   },
   message: {
     fontSize: Typography.size.base,
+    fontFamily: Typography.fontFamily.regular,
     color: Colors.textSecondary,
     textAlign: 'center',
     marginBottom: Spacing.xl,
@@ -31,6 +32,7 @@ export const errorMessageStyles = StyleSheet.create({
   retryText: {
     color: Colors.white,
     fontSize: Typography.size.base,
+    fontFamily: Typography.fontFamily.semibold,
     fontWeight: Typography.weight.semibold,
   },
 });

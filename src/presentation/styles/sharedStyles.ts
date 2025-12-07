@@ -16,6 +16,11 @@ export const Colors = {
   primary: '#4A90E2',
   accent: '#FF6B35',
   shadow: '#000',
+  // Pastel colors for detail screen
+  pinkLight: '#FFE5E5',
+  orangeLight: '#FFB366',
+  purpleLight: '#D4A5FF',
+  redLight: '#FF9999',
 };
 
 export const Spacing = {
@@ -29,6 +34,13 @@ export const Spacing = {
 };
 
 export const Typography = {
+  fontFamily: {
+    regular: 'Nunito-Regular',
+    medium: 'Nunito-Medium',
+    semibold: 'Nunito-SemiBold',
+    bold: 'Nunito-Bold',
+    extraBold: 'Nunito-ExtraBold',
+  },
   size: {
     xs: 11,
     sm: 12,
@@ -47,6 +59,21 @@ export const Typography = {
     medium: '500' as const,
     semibold: '600' as const,
     bold: '700' as const,
+  },
+ 
+  getFontFamily: (weight?: string): string => {
+    switch (weight) {
+      case Typography.weight.medium:
+        return Typography.fontFamily.medium;
+      case Typography.weight.semibold:
+        return Typography.fontFamily.semibold;
+      case Typography.weight.bold:
+        return Typography.fontFamily.bold;
+      case '800':
+        return Typography.fontFamily.extraBold;
+      default:
+        return Typography.fontFamily.regular;
+    }
   },
 };
 
@@ -89,6 +116,7 @@ export const sharedStyles = StyleSheet.create({
   },
   emptyText: {
     fontSize: Typography.size.base,
+    fontFamily: Typography.fontFamily.regular,
     color: Colors.textPlaceholder,
     textAlign: 'center',
   },

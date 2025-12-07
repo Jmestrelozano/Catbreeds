@@ -4,8 +4,6 @@ import {
   FlatList,
   SafeAreaView,
   Text,
-  TextInput,
-  TouchableOpacity,
   Platform,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
@@ -14,6 +12,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { RootStackParamList } from '../../../App';
 import { CatBreedCard } from '../components/CatBreedCard';
 import { ScreenContentWrapper } from '../components/ScreenContentWrapper';
+import { SearchBar } from '../components/SearchBar';
 import { catBreedsListStyles } from '../styles/CatBreedsListScreen.styles';
 import { useCatBreeds } from '../hooks/useCatBreeds';
 import { useBreedFilter } from '../hooks/useBreedFilter';
@@ -42,32 +41,28 @@ export const CatBreedsListScreen: React.FC = () => {
 
       <View style={[styles.navbar, { paddingTop: Platform.OS === 'android' ? Math.max(insets.top, 16) : 16 }]}>
         <View style={styles.navbarLeft}>
-          <Text style={styles.pawIcon}>🐾</Text>
-          <Text style={styles.navbarTitle}>Catbreeds</Text>
-        </View>
-        <View style={styles.navbarRight}>
-          <TouchableOpacity
-            style={styles.navbarIcon}
-            onPress={() => navigation.navigate('Favorites')}>
-            <Text style={styles.favoriteIcon}>❤️</Text>
-          </TouchableOpacity>
+          <Text style={styles.pawIcon} accessibilityRole="none">🐾</Text>
+          <Text style={styles.navbarTitle} accessibilityRole="header">Catbreeds</Text>
         </View>
       </View>
 
-      <View style={styles.searchContainer}>
-        <TextInput
-          style={styles.searchInput}
-          placeholder="Search by name or origin..."
-          placeholderTextColor="#999"
-          value={searchQuery}
-          onChangeText={setSearchQuery}
-        />
-      </View>
-      <View style={styles.header}>
-        <Text style={styles.subtitle}>
-          {filteredBreeds.length} breed{filteredBreeds.length !== 1 ? 's' : ''}{' '}
-          found
-        </Text>
+      <SearchBar
+        value={searchQuery}
+        onChangeText={setSearchQuery}
+        placeholder="Search here...."
+        showIcon={true}
+        showFavoriteButton={true}
+        onFavoritePress={() => navigation.navigate('Favorites')}
+        accessibilityLabel="Search cat breeds"
+        accessibilityHint="Type to search breeds by name or origin"
+      />
+      <View style={styles.tagContainer}>
+        <View style={styles.floatingTag}>
+          <Text style={styles.tagText} accessibilityRole="text">
+            {filteredBreeds.length} breed{filteredBreeds.length !== 1 ? 's' : ''}{' '}
+            found
+          </Text>
+        </View>
       </View>
       <FlatList
         data={filteredBreeds}
@@ -82,8 +77,10 @@ export const CatBreedsListScreen: React.FC = () => {
         )}
         contentContainerStyle={styles.listContent}
         showsVerticalScrollIndicator={false}
+        accessibilityRole="list"
+        accessibilityLabel={`Cat breeds list. ${filteredBreeds.length} ${filteredBreeds.length === 1 ? 'breed found' : 'breeds found'}`}
         ListEmptyComponent={
-          <View style={styles.emptyContainer}>
+          <View style={styles.emptyContainer} accessibilityRole="text">
             <Text style={styles.emptyText}>
               No breeds found matching your search
             </Text>
