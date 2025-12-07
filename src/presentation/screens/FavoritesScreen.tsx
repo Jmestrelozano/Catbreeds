@@ -2,7 +2,6 @@ import React, { useCallback } from 'react';
 import {
   View,
   Text,
-  SafeAreaView,
   FlatList,
   TouchableOpacity,
   RefreshControl,
@@ -11,7 +10,7 @@ import {
 } from 'react-native';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { RootStackParamList } from '../../../App';
 import { CatBreedCard } from '../components/CatBreedCard';
 import { ScreenContentWrapper } from '../components/ScreenContentWrapper';

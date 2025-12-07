@@ -1,8 +1,8 @@
+jest.mock('axios');
+
 import axios from 'axios';
 import { CatApiClient } from '../../../src/infrastructure/api/CatApiClient';
 import { AxiosError } from 'axios';
-
-jest.mock('axios');
 
 describe('CatApiClient', () => {
   let mockAxios: jest.Mocked<typeof axios>;

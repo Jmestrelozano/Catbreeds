@@ -106,7 +106,7 @@ describe('CatBreedDetailScreen', () => {
     expect(breedNames.length).toBeGreaterThan(0);
     expect(getByText('United States')).toBeTruthy();
     expect(getByText('This is a test breed description that is longer')).toBeTruthy();
-    expect(getByText('Description')).toBeTruthy();
+    expect(getByText('About')).toBeTruthy();
     expect(getByText('Temperament')).toBeTruthy();
     expect(getByText('Active, Friendly, Playful')).toBeTruthy();
     expect(getByText('General Information')).toBeTruthy();
@@ -114,9 +114,11 @@ describe('CatBreedDetailScreen', () => {
   });
 
   it('should show all characteristics', () => {
-    const { getByText } = render(<CatBreedDetailScreen />);
+    const { getAllByText, getByText } = render(<CatBreedDetailScreen />);
 
-    expect(getByText('Adaptability')).toBeTruthy();
+    // Adaptability appears in both tags and characteristics, so use getAllByText
+    const adaptabilityElements = getAllByText('Adaptability');
+    expect(adaptabilityElements.length).toBeGreaterThan(0);
     expect(getByText('Affection level')).toBeTruthy();
     expect(getByText('Child friendly')).toBeTruthy();
     expect(getByText('Dog friendly')).toBeTruthy();
@@ -131,9 +133,9 @@ describe('CatBreedDetailScreen', () => {
   });
 
   it('should show empty favorite icon when it is not favorite', () => {
-    const { getByText } = render(<CatBreedDetailScreen />);
+    const { getByLabelText } = render(<CatBreedDetailScreen />);
 
-    expect(getByText('🤍')).toBeTruthy();
+    expect(getByLabelText('Add to favorites')).toBeTruthy();
   });
 
   it('should show filled favorite icon when it is favorite', () => {
@@ -143,16 +145,15 @@ describe('CatBreedDetailScreen', () => {
       toggleFavorite: mockToggleFavorite,
     });
 
-    const { getByText } = render(<CatBreedDetailScreen />);
+    const { getByLabelText } = render(<CatBreedDetailScreen />);
 
-    expect(getByText('❤️')).toBeTruthy();
+    expect(getByLabelText('Remove from favorites')).toBeTruthy();
   });
 
   it('should call toggleFavorite when favorite button is pressed', async () => {
-    const { getAllByText } = render(<CatBreedDetailScreen />);
+    const { getByLabelText } = render(<CatBreedDetailScreen />);
 
-    const favoriteButtons = getAllByText('🤍');
-    const favoriteButton = favoriteButtons[favoriteButtons.length - 1];
+    const favoriteButton = getByLabelText('Add to favorites');
     fireEvent.press(favoriteButton);
 
     expect(mockToggleFavorite).toHaveBeenCalled();
@@ -236,9 +237,9 @@ describe('CatBreedDetailScreen', () => {
   });
 
   it('should navigate back when back button is pressed', () => {
-    const { getByText } = render(<CatBreedDetailScreen />);
+    const { getByLabelText } = render(<CatBreedDetailScreen />);
 
-    const backButton = getByText('←');
+    const backButton = getByLabelText('Back');
     fireEvent.press(backButton);
 
     expect(mockGoBack).toHaveBeenCalledTimes(1);
@@ -271,9 +272,9 @@ describe('CatBreedDetailScreen', () => {
       loadBreed: mockLoadBreed,
     });
 
-    const { queryByText } = render(<CatBreedDetailScreen />);
+    const { queryByLabelText } = render(<CatBreedDetailScreen />);
 
-    const favoriteButton = queryByText('🤍');
+    const favoriteButton = queryByLabelText('Add to favorites');
     expect(favoriteButton).toBeNull();
     expect(mockToggleFavorite).not.toHaveBeenCalled();
   });
@@ -317,10 +318,12 @@ describe('CatBreedDetailScreen', () => {
   });
 
   it('should show life expectancy information', () => {
-    const { getByText } = render(<CatBreedDetailScreen />);
+    const { getAllByText, getByText } = render(<CatBreedDetailScreen />);
 
     expect(getByText('Life expectancy:')).toBeTruthy();
-    expect(getByText('12 - 15 years')).toBeTruthy();
+
+    const lifeSpanElements = getAllByText('12 - 15 years');
+    expect(lifeSpanElements.length).toBeGreaterThan(0);
   });
 });
 

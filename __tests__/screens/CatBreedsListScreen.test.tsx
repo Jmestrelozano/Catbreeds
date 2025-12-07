@@ -17,9 +17,13 @@ jest.mock('@react-navigation/native', () => ({
 }));
 
 const mockUseSafeAreaInsets = jest.fn(() => ({ top: 0, bottom: 0, left: 0, right: 0 }));
-jest.mock('react-native-safe-area-context', () => ({
-  useSafeAreaInsets: () => mockUseSafeAreaInsets(),
-}));
+jest.mock('react-native-safe-area-context', () => {
+  const { View } = require('react-native');
+  return {
+    SafeAreaView: View,
+    useSafeAreaInsets: () => mockUseSafeAreaInsets(),
+  };
+});
 
 jest.mock('../../src/presentation/context/ServicesContext', () => ({
   ServicesProvider: ({ children }: { children: React.ReactNode }) => children,
@@ -125,7 +129,7 @@ describe('CatBreedsListScreen', () => {
   it('should update searchQuery when typing in input', () => {
     const { getByPlaceholderText } = render(<CatBreedsListScreen />);
 
-    const searchInput = getByPlaceholderText('Search by name or origin...');
+    const searchInput = getByPlaceholderText('Search here....');
     fireEvent.changeText(searchInput, 'Test');
 
     expect(mockSetSearchQuery).toHaveBeenCalledWith('Test');
@@ -177,9 +181,9 @@ describe('CatBreedsListScreen', () => {
   });
 
   it('should navigate to Favorites when favorites button is pressed', () => {
-    const { getByText } = render(<CatBreedsListScreen />);
+    const { getByLabelText } = render(<CatBreedsListScreen />);
 
-    const favoriteButton = getByText('❤️');
+    const favoriteButton = getByLabelText('View favorites');
     fireEvent.press(favoriteButton);
 
     expect(mockNavigate).toHaveBeenCalledWith('Favorites');

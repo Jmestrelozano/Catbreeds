@@ -58,19 +58,19 @@ describe('CatBreedCard', () => {
   });
 
   it('should show favorite badge when isFavorite is true', () => {
-    const { getByText } = render(
+    const { getByTestId } = render(
       <CatBreedCard breed={mockBreed} onPress={mockOnPress} isFavorite={true} />
     );
 
-    expect(getByText('❤️')).toBeTruthy();
+    expect(getByTestId('svg-mock')).toBeTruthy();
   });
 
   it('should not show favorite badge when isFavorite is false', () => {
-    const { queryByText } = render(
+    const { queryByTestId } = render(
       <CatBreedCard breed={mockBreed} onPress={mockOnPress} isFavorite={false} />
     );
 
-    const favoriteBadge = queryByText('❤️');
+    const favoriteBadge = queryByTestId('svg-mock');
     expect(favoriteBadge).toBeNull();
   });
 
