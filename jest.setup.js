@@ -75,8 +75,11 @@ jest.mock('@react-native-masked-view/masked-view', () => {
 jest.mock('react-native-svg', () => {
   require('react');
   const { View } = require('react-native');
+  const SvgComponent = View;
   return {
-    Svg: View,
+    __esModule: true,
+    default: SvgComponent,
+    Svg: SvgComponent,
     Circle: View,
     Ellipse: View,
     G: View,
