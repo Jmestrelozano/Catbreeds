@@ -6,6 +6,9 @@ import android.os.Looper
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
+import androidx.core.graphics.Insets
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import com.facebook.react.ReactActivity
 import com.facebook.react.ReactActivityDelegate
 import com.facebook.react.defaults.DefaultNewArchitectureEntryPoint.fabricEnabled
@@ -34,14 +37,49 @@ class MainActivity : ReactActivity() {
    */
   private fun showSplashScreen() {
     Handler(Looper.getMainLooper()).post {
-      val rootView = window.decorView.rootView as? ViewGroup
-      if (rootView != null && splashView == null) {
+      val decorView = window.decorView as? ViewGroup
+      if (decorView != null && splashView == null) {
         splashView = layoutInflater.inflate(R.layout.launch_screen, null)
+        
+        // Configure splash view to ignore system insets completely
+        splashView!!.fitsSystemWindows = false
+        
+        // Remove any padding from the root layout to ensure absolute positioning
+        if (splashView is ViewGroup) {
+          (splashView as ViewGroup).setPadding(0, 0, 0, 0)
+        }
+        
+        // Get screen dimensions for absolute positioning
+        val displayMetrics = resources.displayMetrics
+        val screenWidth = displayMetrics.widthPixels
+        val screenHeight = displayMetrics.heightPixels
+        
+        // Use absolute dimensions to position splash at (0, 0)
         val params = FrameLayout.LayoutParams(
-          FrameLayout.LayoutParams.MATCH_PARENT,
-          FrameLayout.LayoutParams.MATCH_PARENT
+          screenWidth,
+          screenHeight
         )
-        rootView.addView(splashView, params)
+        params.leftMargin = 0
+        params.topMargin = 0
+        
+        // Position splash absolutely at top-left corner
+        splashView!!.x = 0f
+        splashView!!.y = 0f
+        
+        // Ensure the splash view completely ignores system window insets
+        // This is critical to prevent the view from being shifted down
+        ViewCompat.setOnApplyWindowInsetsListener(splashView!!) { view, insets ->
+          // Return empty insets to prevent any padding from being applied
+          val zeroInsets = Insets.of(0, 0, 0, 0)
+          WindowInsetsCompat.Builder()
+            .setInsets(WindowInsetsCompat.Type.systemBars(), zeroInsets)
+            .setInsets(WindowInsetsCompat.Type.displayCutout(), zeroInsets)
+            .setInsets(WindowInsetsCompat.Type.ime(), zeroInsets)
+            .build()
+        }
+        
+        // Add splash view directly to decorView - this ensures it's on top of everything
+        decorView.addView(splashView, params)
       }
     }
   }
