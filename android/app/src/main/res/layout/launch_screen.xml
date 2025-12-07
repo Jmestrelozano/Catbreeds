@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/splash_background">
+    android:background="@color/splash_background"
+    android:fitsSystemWindows="false">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -16,12 +17,12 @@
         <!-- Paw Print Icon -->
         <ImageView
             android:id="@+id/paw_icon"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:src="@drawable/paw_print_white"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:src="@drawable/cat"
+            android:tint="@color/splash_text"
             android:contentDescription="Paw print icon"
-            android:scaleType="fitCenter"
-            android:adjustViewBounds="true" />
+            android:scaleType="fitCenter" />
 
         <!-- App Name -->
         <TextView
@@ -32,7 +33,6 @@
             android:textSize="42sp"
             android:textColor="@color/splash_text"
             android:textStyle="bold"
-            android:layout_marginTop="20dp"
             android:gravity="center" />
 
     </LinearLayout>
