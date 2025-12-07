@@ -1,11 +1,11 @@
 import React, { useCallback } from 'react';
 import {
   View,
-  Text,
   FlatList,
   TouchableOpacity,
   RefreshControl,
-  ScrollView
+  ScrollView,
+  Text
 } from 'react-native';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
@@ -13,11 +13,13 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { RootStackParamList } from '../../../App';
 import { CatBreedCard } from '../components/CatBreedCard';
 import { ScreenContentWrapper } from '../components/ScreenContentWrapper';
+import { ScreenHeader } from '../components/ScreenHeader';
 import { SearchBar } from '../components/SearchBar';
+import { EmptyListMessage } from '../components/EmptyListMessage';
 import { favoritesScreenStyles } from '../styles/FavoritesScreen.styles';
+import { sharedStyles } from '../styles/sharedStyles';
 import { useFavorites } from '../hooks/useFavorites';
 import { useBreedFilter } from '../hooks/useBreedFilter';
-import ExpandLeftIcon from '../../../assets/svg/expand_left.svg';
 
 type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
@@ -50,23 +52,11 @@ export const FavoritesScreen: React.FC = () => {
   return (
     <ScreenContentWrapper loading={loading}>
     <SafeAreaView style={styles.container}>
-
-      <View style={styles.header}>
-        <View style={styles.headerLeft}>
-          <TouchableOpacity
-            onPress={() => navigation.goBack()}
-            style={styles.backButton}
-            accessibilityRole="button"
-            accessibilityLabel="Back"
-            accessibilityHint="Returns to the previous screen">
-            <ExpandLeftIcon width={40} height={40} />
-          </TouchableOpacity>
-          <Text style={styles.pawIcon} accessibilityRole="none">🐾</Text>
-          <Text style={styles.headerTitle} accessibilityRole="header">
-            Favorites ({favorites.length})
-          </Text>
-        </View>
-      </View>
+      <ScreenHeader
+        title={`Favorites (${favorites.length})`}
+        showBackButton={true}
+        onBackPress={() => navigation.goBack()}
+      />
 
 
       <View style={styles.filtersContainer} accessibilityRole="radiogroup" accessibilityLabel="Filters by origin">
@@ -142,7 +132,7 @@ export const FavoritesScreen: React.FC = () => {
             }
           />
         )}
-        contentContainerStyle={styles.listContent}
+        contentContainerStyle={sharedStyles.listContent}
         showsVerticalScrollIndicator={false}
         accessibilityRole="list"
         accessibilityLabel={`Favorites list. ${filteredFavorites.length} ${filteredFavorites.length === 1 ? 'breed found' : 'breeds found'}`}
@@ -154,13 +144,13 @@ export const FavoritesScreen: React.FC = () => {
           />
         }
         ListEmptyComponent={
-          <View style={styles.emptyContainer} accessibilityRole="text">
-            <Text style={styles.emptyText}>
-              {favorites.length === 0
+          <EmptyListMessage
+            message={
+              favorites.length === 0
                 ? "You don't have any favorites yet"
-                : 'No favorites found with these filters'}
-            </Text>
-          </View>
+                : 'No favorites found with these filters'
+            }
+          />
         }
       />
     </SafeAreaView>

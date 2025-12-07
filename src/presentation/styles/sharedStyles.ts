@@ -120,5 +120,8 @@ export const sharedStyles = StyleSheet.create({
     color: Colors.textPlaceholder,
     textAlign: 'center',
   },
+  listContent: {
+    paddingVertical: Spacing.sm,
+  },
 });
 

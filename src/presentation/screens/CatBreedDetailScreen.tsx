@@ -19,7 +19,7 @@ import { catBreedDetailStyles } from '../styles/CatBreedDetailScreen.styles';
 import { Spacing } from '../styles/sharedStyles';
 import { useCatBreedDetail } from '../hooks/useCatBreedDetail';
 import { useFavoriteToggle } from '../hooks/useFavoriteToggle';
-import ExpandLeftIcon from '../../../assets/svg/expand_left.svg';
+import { BackButton } from '../components/BackButton';
 import FavoriteIcon from '../../../assets/svg/favorite.svg';
 import FavoriteFillIcon from '../../../assets/svg/favorite_fill.svg';
 
@@ -103,14 +103,13 @@ export const CatBreedDetailScreen: React.FC = () => {
               </View>
             )}
             <View style={[styles.floatingButtons, { paddingTop: Math.max(insets.top, Spacing.lg) + Spacing.md }]}>
-              <TouchableOpacity
+              <BackButton
                 onPress={() => navigation.goBack()}
-                style={styles.backButton}
-                accessibilityRole="button"
+                size={44}
+                style="floating"
                 accessibilityLabel="Back"
-                accessibilityHint="Returns to the breeds list">
-                <ExpandLeftIcon width={24} height={24} />
-              </TouchableOpacity>
+                accessibilityHint="Returns to the breeds list"
+              />
               <TouchableOpacity
                 style={styles.favoriteButtonFloating}
                 onPress={handleToggleFavorite}

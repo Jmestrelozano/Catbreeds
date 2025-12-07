@@ -10,8 +10,11 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { RootStackParamList } from '../../../App';
 import { CatBreedCard } from '../components/CatBreedCard';
 import { ScreenContentWrapper } from '../components/ScreenContentWrapper';
+import { ScreenHeader } from '../components/ScreenHeader';
 import { SearchBar } from '../components/SearchBar';
+import { EmptyListMessage } from '../components/EmptyListMessage';
 import { catBreedsListStyles } from '../styles/CatBreedsListScreen.styles';
+import { sharedStyles } from '../styles/sharedStyles';
 import { useCatBreeds } from '../hooks/useCatBreeds';
 import { useBreedFilter } from '../hooks/useBreedFilter';
 
@@ -35,13 +38,7 @@ export const CatBreedsListScreen: React.FC = () => {
   return (
     <ScreenContentWrapper loading={loading} error={error} onRetry={loadBreeds}>
     <SafeAreaView style={styles.container}>
-
-      <View style={styles.navbar}>
-        <View style={styles.navbarLeft}>
-          <Text style={styles.pawIcon} accessibilityRole="none">🐾</Text>
-          <Text style={styles.navbarTitle} accessibilityRole="header">Catbreeds</Text>
-        </View>
-      </View>
+      <ScreenHeader title="Catbreeds" />
 
       <SearchBar
         value={searchQuery}
@@ -72,16 +69,12 @@ export const CatBreedsListScreen: React.FC = () => {
             }
           />
         )}
-        contentContainerStyle={styles.listContent}
+        contentContainerStyle={sharedStyles.listContent}
         showsVerticalScrollIndicator={false}
         accessibilityRole="list"
         accessibilityLabel={`Cat breeds list. ${filteredBreeds.length} ${filteredBreeds.length === 1 ? 'breed found' : 'breeds found'}`}
         ListEmptyComponent={
-          <View style={styles.emptyContainer} accessibilityRole="text">
-            <Text style={styles.emptyText}>
-              No breeds found matching your search
-            </Text>
-          </View>
+          <EmptyListMessage message="No breeds found matching your search" />
         }
       />
     </SafeAreaView>
