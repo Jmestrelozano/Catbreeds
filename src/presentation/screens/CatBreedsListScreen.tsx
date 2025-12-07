@@ -2,12 +2,11 @@ import React, { useEffect } from 'react';
 import {
   View,
   FlatList,
-  Text,
-  Platform,
+  Text
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { RootStackParamList } from '../../../App';
 import { CatBreedCard } from '../components/CatBreedCard';
 import { ScreenContentWrapper } from '../components/ScreenContentWrapper';
@@ -20,7 +19,6 @@ type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
 export const CatBreedsListScreen: React.FC = () => {
   const navigation = useNavigation<NavigationProp>();
-  const insets = useSafeAreaInsets();
   const { breeds, loading, error, loadBreeds } = useCatBreeds();
   const {
     searchQuery,
@@ -38,7 +36,7 @@ export const CatBreedsListScreen: React.FC = () => {
     <ScreenContentWrapper loading={loading} error={error} onRetry={loadBreeds}>
     <SafeAreaView style={styles.container}>
 
-      <View style={[styles.navbar, { paddingTop: Platform.OS === 'android' ? Math.max(insets.top, 16) : 16 }]}>
+      <View style={styles.navbar}>
         <View style={styles.navbarLeft}>
           <Text style={styles.pawIcon} accessibilityRole="none">🐾</Text>
           <Text style={styles.navbarTitle} accessibilityRole="header">Catbreeds</Text>

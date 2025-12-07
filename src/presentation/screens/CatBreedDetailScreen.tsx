@@ -12,9 +12,9 @@ import { useRoute, RouteProp, useFocusEffect, useNavigation } from '@react-navig
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import MaskedView from '@react-native-masked-view/masked-view';
-import Svg, { Path } from 'react-native-svg';
 import { RootStackParamList } from '../../../App';
 import { ScreenContentWrapper } from '../components/ScreenContentWrapper';
+import { CurvedMask } from '../components/CurvedMask';
 import { catBreedDetailStyles } from '../styles/CatBreedDetailScreen.styles';
 import { Spacing } from '../styles/sharedStyles';
 import { useCatBreedDetail } from '../hooks/useCatBreedDetail';
@@ -29,22 +29,6 @@ type CatBreedDetailScreenRouteProp = RouteProp<
   RootStackParamList,
   'CatBreedDetail'
 >;
-
-interface CurvedMaskProps {
-  width: number;
-  height: number;
-  curveHeight: number;
-}
-
-const CurvedMask: React.FC<CurvedMaskProps> = ({ width, height, curveHeight }) => {
-  const maskPath = `M0,0 L${width},0 L${width},${height - curveHeight} Q${width / 2},${height} 0,${height - curveHeight} Z`;
-  
-  return (
-    <Svg width={width} height={height}>
-      <Path d={maskPath} fill="white" />
-    </Svg>
-  );
-};
 
 export const CatBreedDetailScreen: React.FC = () => {
   const navigation = useNavigation<NavigationProp>();

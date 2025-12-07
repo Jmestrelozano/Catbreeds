@@ -5,12 +5,11 @@ import {
   FlatList,
   TouchableOpacity,
   RefreshControl,
-  ScrollView,
-  Platform,
+  ScrollView
 } from 'react-native';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { RootStackParamList } from '../../../App';
 import { CatBreedCard } from '../components/CatBreedCard';
 import { ScreenContentWrapper } from '../components/ScreenContentWrapper';
@@ -24,7 +23,6 @@ type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
 export const FavoritesScreen: React.FC = () => {
   const navigation = useNavigation<NavigationProp>();
-  const insets = useSafeAreaInsets();
   const {
     favorites,
     loading,
@@ -53,7 +51,7 @@ export const FavoritesScreen: React.FC = () => {
     <ScreenContentWrapper loading={loading}>
     <SafeAreaView style={styles.container}>
 
-      <View style={[styles.header, { paddingTop: Platform.OS === 'android' ? Math.max(insets.top, 16) : 16 }]}>
+      <View style={styles.header}>
         <View style={styles.headerLeft}>
           <TouchableOpacity
             onPress={() => navigation.goBack()}
