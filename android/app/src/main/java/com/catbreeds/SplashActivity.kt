@@ -9,6 +9,19 @@ import androidx.appcompat.app.AppCompatActivity
 class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        
+        // Enable edge-to-edge display and draw behind system bars
+        window.statusBarColor = android.graphics.Color.TRANSPARENT
+        window.navigationBarColor = android.graphics.Color.TRANSPARENT
+        
+        // Make sure content draws behind system bars
+        val decorView = window.decorView
+        decorView.systemUiVisibility = (
+          android.view.View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+          or android.view.View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+          or android.view.View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+        )
+        
         setContentView(R.layout.launch_screen)
         
         // Wait 2 seconds before starting MainActivity
