@@ -224,8 +224,6 @@ describe('FavoritesScreen', () => {
   it('should show all cards with favorite badge', () => {
     const { getAllByTestId } = render(<FavoritesScreen />);
 
-    // Los SVGs ahora se renderizan como Views con testID="svg-mock"
-    // Buscamos los SVGs dentro de los badges de favorito
     const favoriteIcons = getAllByTestId('svg-mock');
     expect(favoriteIcons.length).toBeGreaterThan(0);
   });
@@ -239,7 +237,6 @@ describe('FavoritesScreen', () => {
   it('should navigate back when back button is pressed', () => {
     const { getByLabelText } = render(<FavoritesScreen />);
 
-    // El botón de retroceso tiene accessibilityLabel="Back"
     const backButton = getByLabelText('Back');
     fireEvent.press(backButton);
 

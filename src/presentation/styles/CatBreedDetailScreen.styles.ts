@@ -48,15 +48,6 @@ export const catBreedDetailStyles = StyleSheet.create({
     paddingHorizontal: Spacing.lg,
     paddingTop: Spacing.lg,
   },
-  backButton: {
-    width: 44,
-    height: 44,
-    borderRadius: 22,
-    backgroundColor: Colors.white,
-    justifyContent: 'center',
-    alignItems: 'center',
-    ...Shadows.card,
-  },
   favoriteButtonFloating: {
     width: 44,
     height: 44,

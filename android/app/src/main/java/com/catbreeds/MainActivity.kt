@@ -24,6 +24,18 @@ class MainActivity : ReactActivity() {
     // This prevents flickering when transitioning from SplashActivity
     setTheme(R.style.SplashTheme)
     super.onCreate(savedInstanceState)
+    
+    // Enable edge-to-edge display and draw behind system bars
+    window.statusBarColor = android.graphics.Color.TRANSPARENT
+    window.navigationBarColor = android.graphics.Color.TRANSPARENT
+    
+    // Make sure content draws behind system bars
+    val decorView = window.decorView
+    decorView.systemUiVisibility = (
+      android.view.View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+      or android.view.View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+      or android.view.View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+    )
   }
 
   override fun onPostCreate(savedInstanceState: Bundle?) {
@@ -36,9 +48,11 @@ class MainActivity : ReactActivity() {
    * Shows the splash screen overlay
    */
   private fun showSplashScreen() {
+    // Post to ensure decorView is ready
     Handler(Looper.getMainLooper()).post {
-      val decorView = window.decorView as? ViewGroup
-      if (decorView != null && splashView == null) {
+      val decorView = window.decorView as? ViewGroup ?: return@post
+      
+      if (splashView == null && !splashScreenHidden) {
         splashView = layoutInflater.inflate(R.layout.launch_screen, null)
         
         // Configure splash view to ignore system insets completely
@@ -49,25 +63,14 @@ class MainActivity : ReactActivity() {
           (splashView as ViewGroup).setPadding(0, 0, 0, 0)
         }
         
-        // Get screen dimensions for absolute positioning
-        val displayMetrics = resources.displayMetrics
-        val screenWidth = displayMetrics.widthPixels
-        val screenHeight = displayMetrics.heightPixels
-        
-        // Use absolute dimensions to position splash at (0, 0)
+        // Use MATCH_PARENT to fill entire screen - this prevents displacement
         val params = FrameLayout.LayoutParams(
-          screenWidth,
-          screenHeight
+          FrameLayout.LayoutParams.MATCH_PARENT,
+          FrameLayout.LayoutParams.MATCH_PARENT
         )
-        params.leftMargin = 0
-        params.topMargin = 0
-        
-        // Position splash absolutely at top-left corner
-        splashView!!.x = 0f
-        splashView!!.y = 0f
         
         // Ensure the splash view completely ignores system window insets
-        // This is critical to prevent the view from being shifted down
+        // This prevents any shifting when system bars are shown/hidden
         ViewCompat.setOnApplyWindowInsetsListener(splashView!!) { view, insets ->
           // Return empty insets to prevent any padding from being applied
           val zeroInsets = Insets.of(0, 0, 0, 0)
@@ -78,7 +81,7 @@ class MainActivity : ReactActivity() {
             .build()
         }
         
-        // Add splash view directly to decorView - this ensures it's on top of everything
+        // Add splash view directly to decorView at the end to ensure it's on top
         decorView.addView(splashView, params)
       }
     }

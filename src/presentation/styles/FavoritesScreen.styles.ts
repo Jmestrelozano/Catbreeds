@@ -6,36 +6,6 @@ export const favoritesScreenStyles = StyleSheet.create({
     flex: 1,
     backgroundColor: Colors.background,
   },
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    padding: Spacing.lg,
-    backgroundColor: Colors.white,
-    borderBottomWidth: 1,
-    borderBottomColor: Colors.border,
-  },
-  headerLeft: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  backButton: {
-    marginRight: Spacing.lg,
-  },
-  backIcon: {
-    fontSize: Typography.size.xxl,
-    color: Colors.textPrimary,
-  },
-  pawIcon: {
-    fontSize: Typography.size.xxl,
-    marginRight: Spacing.sm,
-  },
-  headerTitle: {
-    fontSize: Typography.size.xl,
-    fontFamily: Typography.fontFamily.bold,
-    fontWeight: Typography.weight.bold,
-    color: Colors.textPrimary,
-  },
   filtersContainer: {
     backgroundColor: Colors.white,
     borderBottomWidth: 1,
@@ -66,19 +36,6 @@ export const favoritesScreenStyles = StyleSheet.create({
   },
   filterChipTextSelected: {
     color: Colors.white,
-  },
-  listContent: {
-    paddingVertical: Spacing.sm,
-  },
-  emptyContainer: {
-    padding: Spacing.xxxl,
-    alignItems: 'center',
-  },
-  emptyText: {
-    fontSize: Typography.size.base,
-    fontFamily: Typography.fontFamily.regular,
-    color: Colors.textPlaceholder,
-    textAlign: 'center',
   },
 });
 
