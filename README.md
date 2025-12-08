@@ -143,6 +143,16 @@ cd ios
 xcodebuild -workspace Catbreeds.xcworkspace -scheme Catbreeds -configuration Release
 ```
 
+## 📥 Descarga
+
+### Android APK
+
+Puedes descargar la versión más reciente de la aplicación directamente:
+
+**[Descargar APK](https://drive.google.com/file/d/1KTFI9AH_ss9cCd6_8hR-5LJrtu8FbSTQ/view?usp=drive_link)**
+
+**Nota:** Para instalar el APK en tu dispositivo Android, necesitarás habilitar la instalación desde fuentes desconocidas en la configuración de seguridad de tu dispositivo.
+
 ## 🧪 Testing
 
 Ejecuta los tests:
